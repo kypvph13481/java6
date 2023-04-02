@@ -1,4 +1,6 @@
 app.controller("authority-ctrl", function($scope, $http, $location){
+    alert("author")
+
     $scope.roles = [];
     $scope.admins = [];
     $scope.authorities = [];

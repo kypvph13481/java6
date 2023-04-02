@@ -21,7 +21,7 @@ public class AuthorityRestController {
     @GetMapping
     public List<Authority> findAll(@RequestParam("admin")Optional<Boolean> admin){
         if(admin.orElse(false)){
-            return authorityService.findAuthoritiesOfAdmin();
+            return authorityService.findAuthoritiesOfAdministrator();
         }
         return authorityService.findAll();
     }

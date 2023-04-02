@@ -6,9 +6,10 @@ import com.example.shopjava6.ripository.AccountRepository;
 import com.example.shopjava6.ripository.AuthorityRepository;
 import com.example.shopjava6.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class AuthorityServiceImp implements AuthorityService {
     @Autowired
     AuthorityRepository authorityRepository;
@@ -23,7 +24,7 @@ public class AuthorityServiceImp implements AuthorityService {
     }
 
     @Override
-    public List<Authority> findAuthoritiesOfAdmin() {
+    public List<Authority> findAuthoritiesOfAdministrator() {
         List<Account> accounts = accountRepository.getAdmin();
         return authorityRepository.authoritiesOf(accounts);
     }
