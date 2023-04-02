@@ -1,0 +1,11 @@
+<div xmlns:th="https://www.thymeleaf.org">
+    <div class="row px-3 py-3  " >
+        <div class="card bg-light">
+            <div class="card-body text-center " style="font-family: 'Arial', cursive; color: rgb(121, 73, 19);">
+                <i class="bi bi-cart-plus"></i>   <b>Your Cart</b>
+                <p><a class="text-decoration-none" th:href="@{/cart/view}">{{cart.count}} Sản phẩm & {{cart.amount}}$</a></p>
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+    <!--/*@thymesVar id="item" type=""*/-->
+    <main th:object="${item}" class="poly-item-detail">
+        <div class="row px-3 py-3">
+            <div class="col-8 img-fluild" >
+                 <img class="card-img"  th:src="@{|/assets/images/*{image}|}" alt="">
+            </div>
+            <div class="col-4 text-center text-decoration-none">
+                <ul>
+                    <li th:text="*{name}"></li>
+                    <li th:text="*{price}"></li>
+                    <li th:text="*{createDate}"></li>
+         <li th:text="*{category.name}"></li>
+                </ul>
+                <button th:attr="ng-click=@{|cart.add(${id})|}"  class="btn btn-success">
+                   <b>THÊM VÀO GIỎ HÀNG</b> <i class="bi bi-cart-plus"></i>
+                </button>
+            </div>
+            
+           
+        </div>
+
+        
+        <div class="row">
+            <div class="card ">
+                <div class="card-heading">
+                    HÀNG CÙNG LOẠI
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li th:each="p : *{category.products}">
+                            <a th:href="@{|/product/detail/${#ids}|}" th:text="${p.name}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            </main>
+</body>
+</html>
