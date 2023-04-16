@@ -44,5 +44,11 @@ public class ProductServiceImp implements ProductService {
         productRepository.deleteById(id);
     }
 
+	@Override
+	public List<Product> findByName(String name) {
+		// TODO Auto-generated method stub
+		return productRepository.findByName(name);
+	}
+
 
 }

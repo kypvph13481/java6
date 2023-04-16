@@ -44,9 +44,9 @@ app.controller("product-ctrl", function ($scope, $http) {
 			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.items.push(resp.data);
 			$scope.reset();
-			alert("Create successfully");
+			toastr.success("Thêm sản phẩm thành công!");
 		}).catch(error => {
-			alert("fail");
+			toastr.success("Lỗi!");
 			console.log("Error", error);
 		});
 	}
@@ -57,24 +57,37 @@ app.controller("product-ctrl", function ($scope, $http) {
 		$http.put(`/rest/products/${item.id}`, item).then(resp => {
 			var index = $scope.items.findIndex(p => p.id == item.id);
 			$scope.items[index] = item;
-			alert("success");
+			toastr.success("Update sản phẩm thành công!");
 		}).catch(error => {
-			alert("fail");
+			toastr.success("Lỗi!");
 			console.log("Error", error);
 		});
 	}
 
 	//delete
+
+
 	$scope.delete = function (item) {
-		$http.delete(`/rest/products/${item.id}`).then(resp => {
-			var index = $scope.items.findIndex(p => p.id == item.id);
-			$scope.items.splice(index, 1);
-			alert("success");
-			$scope.reset();
-		}).catch(error => {
-			alert("fail");
-			console.log("Error", error);
-		});
+		var x = confirm("Are you sure you want to delete?");
+		if(x){
+			$http.delete(`/rest/products/${item.id}`).then(resp => {
+				var index = $scope.items.findIndex(p => p.id == item.id);
+				$scope.items.splice(index, 1);
+				alert("success");
+				$scope.reset();
+
+			}).catch(error => {
+				alert("fail");
+				console.log("Error", error);
+			});
+			return true;
+
+		}else{
+			return false;
+		}
+
+
+
 	}
 
 	//upload img
@@ -99,7 +112,7 @@ app.controller("product-ctrl", function ($scope, $http) {
 		var name = document.getElementById("myText").value;
 		if (name == '')
 			name = 'all';
-		$http.get(`/rest/product/name/${name}`).then(resp => {
+		$http.get(`/rest/products/name/{name}`).then(resp => {
 			$scope.items = resp.data;
 			$scope.items.forEach(item => {
 				item.createdate = new Date(item.createdate)

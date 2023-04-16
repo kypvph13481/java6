@@ -76,10 +76,10 @@
                     class="fa fa-bookmark-o" aria-hidden="true"></i> Create</button>
             <button ng-click="update()" class="btn btn-warning mr-4" style="font-family: 'Fjalla One', sans-serif;"><i
                     class="fa fa-info" aria-hidden="true"></i> Update</button>
-            <button ng-click="delete(form)" class="btn btn-danger mr-4"
+            <button onclick="if (!confirm('Are you sure?')) { return false }" ng-click="delete(form)" class="btn btn-danger mr-4"
                 style="font-family: 'Fjalla One', sans-serif;"><i class="fa fa-trash" aria-hidden="true"></i>
                 Delete</button>
-            <button ng-click="reset()" class="btn btn-info mr-5" style="font-family: 'Fjalla One', sans-serif;"><i
+            <button  ng-click="reset()" class="btn btn-info mr-5" style="font-family: 'Fjalla One', sans-serif;"><i
                     class="fa fa-paper-plane-o" aria-hidden="true"></i> Reset</button>
         </div>
 

@@ -20,6 +20,8 @@ public class ProductRestController {
         return productService.findAll();
     }
     @GetMapping("{id}")
+
+
     public Product getOne(@PathVariable("id") Integer id){
         return productService.findById(id);
     }
@@ -36,4 +38,12 @@ public class ProductRestController {
     public void update(@PathVariable("id") Integer id){
         productService.delete(id);
     }
+    @GetMapping("name/{name}")
+	public List<Product> findByName(@PathVariable("name") String name) {
+		if(name.equals("all")) {
+			return productService.findByName("%%");
+		}
+		else
+			return productService.findByName("%"+name+"%");
+	}
 }
