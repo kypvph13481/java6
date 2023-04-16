@@ -1,15 +1,14 @@
 app.controller("authority-ctrl", function($scope, $http, $location){
-    alert("author")
-
     $scope.roles = [];
     $scope.admins = [];
     $scope.authorities = [];
 
     $scope.initialize = function (){
-
+        console.log("abc")
         //load all roles
         $http.get("/rest/roles").then(resp =>{
             $scope.roles = resp.data;
+            console.log(data)
         })
 
         //load staff and director(admin)
@@ -24,7 +23,7 @@ app.controller("authority-ctrl", function($scope, $http, $location){
             $location.path("/unauthorized");
         })
     }
-
+    $scope.initialize();
     $scope.authority_of = function (acc, role){
         if ($scope.authorities){
             return $scope.authorities.find(ur => ur.account == acc.username && ur.role.id ==role.id);

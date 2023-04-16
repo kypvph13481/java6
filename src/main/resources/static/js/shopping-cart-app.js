@@ -9,7 +9,8 @@ app.controller("shopping-cart-ctrl", function($scope, $http){
 			if(item){
 				item.quantity++;
 				this.saveToLocalStorage();
-				alert("Add " + item.name + " to cart");
+				toastr.success("Đã thêm sản phẩm " + item.name + " vào giỏ hàng");
+
 			}
 			else{
 				$http.get(`/rest/products/${id}`)
@@ -17,7 +18,7 @@ app.controller("shopping-cart-ctrl", function($scope, $http){
 					resp.data.quantity=1;
 					this.items.push(resp.data);
 					this.saveToLocalStorage();
-					alert("Add" + item.name + " to cart");
+					toastr.success("Đã thêm sản phẩm " + item.name + " vào giỏ hàng");
 				})
 			}
 		},
@@ -29,6 +30,7 @@ app.controller("shopping-cart-ctrl", function($scope, $http){
 			if(ok){
 				this.items.splice(index,1);
 				this.saveToLocalStorage();
+				toastr.success("Đã xoá sản phẩm " + item.name + " khỏi giỏ hàng");
 			}
 			
 		},
@@ -38,6 +40,7 @@ app.controller("shopping-cart-ctrl", function($scope, $http){
 			if(ok){
 				this.items=[];
 				this.saveToLocalStorage();
+				toastr.success("Đã xoá tất cả sản phẩm");
 			}
 		},
         //Tính thành tiền của 1 sản phẩm
@@ -92,13 +95,13 @@ app.controller("shopping-cart-ctrl", function($scope, $http){
 	purchase(){
 		var valid = document.getElementById("myTextarea").value;
 		if(valid.length == 0){
-			alert("Plese input address");
+			toastr.danger("Mời nhập địa chỉ");
 			document.getElementById("myTextarea").focus();
 		}else{
 			var order = angular.copy(this);
 			//do order
 			$http.post("/rest/orders",order).then(resp => {
-				alert("order thành công");
+				toastr.success("Order thành công");
 				$scope.cart.clear();
 				location.href="/order/detail/"+resp.data.id;
 			}).catch(error => {
